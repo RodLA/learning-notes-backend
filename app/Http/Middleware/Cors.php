@@ -16,6 +16,7 @@ class Cors
      */
     public function handle(Request $request, Closure $next)
     {
+        ##Fix for CORS bug
         $response = $next($request);
 
         $response->headers->set('Access-Control-Allow-Origin', '*');
