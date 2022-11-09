@@ -3,20 +3,18 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\NoteController;
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(["middleware" => "auth:api"], function () {
+
+    Route::group(['prefix' => 'note'], function () {
+        Route::get('/all', [NoteController::class, 'UserNotes'])->name('api.note.all');
+        Route::post('/store', [NoteController::class, 'store'])->name('api.note.store');
+        Route::post('/update', [NoteController::class, 'update'])->name('api.note.update');
+        Route::delete('/delete/{id}', [NoteController::class, 'delete'])->name('api.note.delete');
+    });
 });
 
-Route::post('/login', 'App\Http\Controllers\AuthController@login')->name('api.login');
-Route::post('/register', 'App\Http\Controllers\AuthController@register')->name('api.register');
+Route::post('/login', [AuthController::class, 'login'] )->name('api.login');
+Route::post('/register', [AuthController::class, 'register'] )->name('api.register');

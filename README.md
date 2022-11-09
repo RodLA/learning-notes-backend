@@ -1,7 +1,19 @@
 Proyecto de apuntes de aprendizaje
 
-command for migrate
-- php artisan migrate
+commands to run the project
+
+- composer install
+
+- npm install
+
+- .env (Config file ENV)
+
+- php artisan key:generate
+
+- php artisan migrate --seed
+
+- php artisan passport:install
+
 
 command for add Passport
 - php artisan passport:keys
