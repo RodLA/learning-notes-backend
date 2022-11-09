@@ -9,7 +9,8 @@ use Illuminate\Support\Facades\Auth;
 class NoteController extends Controller
 {
     public function UserNotes(){
-        $notes = Note::where([ 'user_id' => 1, 'status' => true ])->get();
+        $user = auth()->user();
+        $notes = Note::where([ 'user_id' => $user->id, 'status' => true ])->get();
         return response()->json(["notes" => $notes]);
     }
     public function store(Request $request){
