@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\NoteController;
+use App\Http\Controllers\ForgotPasswordController;
+use App\Http\Controllers\ResetPasswordController;
 
 Route::group(["middleware" => "auth:api"], function () {
 
@@ -18,3 +20,6 @@ Route::group(["middleware" => "auth:api"], function () {
 
 Route::post('/login', [AuthController::class, 'login'] )->name('api.login');
 Route::post('/register', [AuthController::class, 'register'] )->name('api.register');
+
+Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail'] )->name('api.forgot-password');
+Route::post('/reset-password', [ResetPasswordController::class, 'reset'] )->name('api.reset-password');
