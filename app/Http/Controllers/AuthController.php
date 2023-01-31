@@ -13,6 +13,7 @@ class AuthController extends Controller
 {
     public function login(UserLoginRequest $request){
 
+        //PART 9 para el resumen
         $credentials = $request->only('email','password');
 
         if( !Auth::attempt( $credentials ) ){
@@ -24,7 +25,7 @@ class AuthController extends Controller
         $accessToken = Auth::user()->createToken('authTestToken')->accessToken;
 
         return response([
-            "user" => Auth::user(),
+            "user" => $credentials,
             "access_token" => $accessToken
         ]);
     }
