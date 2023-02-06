@@ -2,7 +2,7 @@
 
 namespace App\Traits;
 
-use App\Permission;
+use App\Models\Permission;
 
 trait HasPermissions
 {

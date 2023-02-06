@@ -8,6 +8,7 @@ use Illuminate\Database\Seeder;
 //IMPORT SEEDER
 use Database\Seeders\UserSeeder;
 use Database\Seeders\NoteSeeder;
+use Database\Seeders\RoleSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -18,7 +19,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(UserSeeder::class);
-        $this->call(NoteSeeder::class);
+        // $this->call(UserSeeder::class);
+        // $this->call(NoteSeeder::class);
+        $this->call(RoleSeeder::class);
     }
 }

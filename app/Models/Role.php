@@ -25,4 +25,12 @@ class Role extends Model
         // $role->hasPermissionTo('edit-user', 'edit-issue');
         return $this->permissions()->whereIn('slug', $permissions)->count();
     }
+
+    public function scopeDeveloper( $query ){
+        return $this->where('slug','developer');
+    }
+
+    public function scopeAdmin( $query ){
+        return $this->where('slug','admin');
+    }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UserLoginRequest;
 use App\Http\Requests\UserRegisterRequest;
 use App\Models\User;
+use App\Models\Role;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
@@ -31,14 +32,18 @@ class AuthController extends Controller
     }
     public function register(UserRegisterRequest $request){
 
+        $developerRole = Role::where('slug','developer')->first();
+
         DB::beginTransaction();
         try {
 
-            User::create([
+            $user = User::create([
                 'name' => $request->name,
                 'email' => $request->email,
                 'password' => Hash::make($request->password)
             ]);
+
+            $user->roles()->attach( $developerRole->id );
 
             DB::commit();
 
@@ -50,11 +55,13 @@ class AuthController extends Controller
 
             $success = false;
             $message = "Registration failed";
+            $user = 'fallo';
         }
 
         $response = [
             'success' => $success,
-            'message' => $message
+            'message' => $message,
+            'user' => $user
         ];
 
         return response()->json( $response );
