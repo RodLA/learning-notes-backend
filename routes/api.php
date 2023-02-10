@@ -7,6 +7,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\NoteController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\ResetPasswordController;
+use App\Http\Controllers\UserController;
 
 // Route::group(["middleware" => "auth:api"], function () {
 
@@ -18,8 +19,13 @@ use App\Http\Controllers\ResetPasswordController;
 //     });
 // });
 
-Route::middleware('auth:api')->get('/me', function (Request $request) {
-    return $request->user();
+// Route::middleware('auth:api')->get('/me', function (Request $request) {
+//     return $request->user();
+// });
+
+//                              "clase:metodo"
+Route::group( ["middleware" => "auth:api"] , function(){
+    Route::get('/me', [UserController::class, 'me'] )->name('api.me');
 });
 
 Route::post('/login', [AuthController::class, 'login'] )->name('api.login');
