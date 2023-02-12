@@ -26,6 +26,8 @@ use App\Http\Controllers\UserController;
 //                              "clase:metodo"
 Route::group( ["middleware" => "auth:api"] , function(){
     Route::get('/me', [UserController::class, 'me'] )->name('api.me');
+    Route::post('/change-password', [UserController::class, 'changePassword'] )->name('api.change-password');
+    Route::post('/change-details', [UserController::class, 'changeDetails'] )->name('api.change-details');
 });
 
 Route::post('/login', [AuthController::class, 'login'] )->name('api.login');
